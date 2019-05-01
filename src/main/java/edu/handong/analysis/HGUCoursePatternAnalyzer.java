@@ -48,6 +48,7 @@ public class HGUCoursePatternAnalyzer {
 		
 	}
 
+	
 	/**
 	 * This method returns a Student array to initiate the field, students, from lines.
 	 * @param lines
@@ -55,25 +56,49 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private Student[] initiateStudentArrayFromLines(String[] lines) {
 		
-		// TODO: implement this method
+		Student[] tempStudents = new Student[numOfStudents];
 		
+		int countS = 0;
+		for (int i = 0; i < lines.length; i++)
+		{
+			String tempStudentName = lines[i].split(", ")[1];
+			
+			Student tempStudent = new Student(tempStudentName);
+			
+			// boolean tempb = studentExist(tempStudents, tempStudent);
+				// System.out.println(tempb);
+				// if(tempb) continue;
+			
+			if(studentExist(tempStudents, tempStudent)) continue;
+			else 
+			{
+				tempStudents[countS] = tempStudent;
+				countS++;
+				// System.out.println(countS);
+			}	
+		}
 		
-		return null;
+		return tempStudents;
 	}
 
 	/**
-	 * This method check if there is the same name of the second arugement in the array, students
+	 * This method check if there is the same name of the second argument in the array, students
 	 * @param students
 	 * @param student
 	 * @return boolean
 	 */
 	private boolean studentExist(Student[] students, Student student) {
 		
-		// TODO: implement this method
+		for (int i = 0; i < students.length; i++)
+		{
+			if(students[i] != null && student.getName().equals(students[i].getName())) return true;
+			// System.out.println(students[i]);
+		}
 
 		return false;
 	}
 	
+		
 	/**
 	 * This method returns a Course array to initiate the field, courses, from lines.
 	 * @param lines
@@ -81,9 +106,23 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private Course[] initiateCourseArrayFromLines(String[] lines) {
 		
-		// TODO: implement this method
+		Course[] tempCourses = new Course[numOfCourses];
 		
-		return null;
+		int countC = 0;
+		for(int i = 0; i < lines.length; i++) {
+			String tempCourseName = lines[i].split(", ")[2];
+			
+			Course tempCourse = new Course(tempCourseName);
+			
+			if(courseExist(tempCourses, tempCourse)) continue;
+			else
+			{
+				tempCourses[countC] = tempCourse;
+				countC++;
+			}
+		}
+		
+		return tempCourses;
 	}
 
 	/**
@@ -94,8 +133,11 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private boolean courseExist(Course[] courses, Course course) {
 		
-		// TODO: implement this method
-
+		for (int i = 0; i < courses.length; i++)
+		{
+			if(courses[i] != null && course.getCourseName().equals(courses[i].getCourseName())) return true;
+		}
+		
 		return false;
 	}
 
